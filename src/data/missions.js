@@ -1,0 +1,51 @@
+export const missions = [
+  {
+    id: "translate_3",
+    type: "translate",
+    target: 3,
+    desc: "Vertaal 3 zinnen naar Minionese",
+    icon: "🗣️",
+  },
+  {
+    id: "translate_5",
+    type: "translate",
+    target: 5,
+    desc: "Vertaal 5 zinnen naar Minionese",
+    icon: "🗣️",
+  },
+  {
+    id: "quiz_3",
+    type: "quiz",
+    target: 3,
+    desc: "Antwoord 3 keer juist in de Quiz",
+    icon: "🧠",
+  },
+  {
+    id: "quiz_10",
+    type: "quiz",
+    target: 10,
+    desc: "Antwoord 10 keer juist in de Quiz",
+    icon: "🎓",
+  },
+  {
+    id: "flashcard_5",
+    type: "flashcard",
+    target: 5,
+    desc: "Draai 5 Flashcards om",
+    icon: "🃏",
+  },
+  {
+    id: "flashcard_10",
+    type: "flashcard",
+    target: 10,
+    desc: "Bestudeer 10 Flashcards",
+    icon: "👀",
+  },
+  {
+    id: "name_1",
+    type: "name",
+    target: 1,
+    desc: "Genereer een nieuwe Minion-naam",
+    icon: "🏷️",
+  },
+];

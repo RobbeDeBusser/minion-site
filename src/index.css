@@ -1,0 +1,431 @@
+/* Zorg ervoor dat je Tailwind's basisstijlen importeert */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Globale stijlen */
+body {
+  font-family: "Inter", sans-serif;
+
+  /* --- NIEUWE ACHTERGROND --- */
+  background-color: #fffbeb; /* Amber-50: Een warme, zachte tint */
+
+  /* Een strakker, duidelijker bananen-patroon */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-opacity='0.25'%3E%3Ctext x='15' y='35' font-size='30' transform='rotate(15 15 35)'%3E🍌%3C/text%3E%3Ctext x='65' y='85' font-size='30' transform='rotate(-15 65 85)'%3E🍌%3C/text%3E%3C/g%3E%3C/svg%3E");
+
+  background-size: 100px 100px; /* Ruimer opgezet patroon */
+  background-attachment: fixed; /* Blijft staan tijdens scrollen */
+  /* -------------------------- */
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  /* --- CURSOR SET (Behouden) --- */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🍌%3C/text%3E%3C/svg%3E")
+      8 8,
+    auto !important;
+}
+
+/* Klik Banaan */
+a,
+button,
+[role="button"],
+.cursor-pointer,
+.admin-drop-zone,
+.flashcard-stack-card,
+.soundboard-button,
+a:active,
+button:active,
+[role="button"]:active,
+.admin-drop-zone:active,
+.flashcard-stack-card:active,
+.soundboard-button:active {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90' transform='rotate(15 50 50)'%3E🍌%3C/text%3E%3C/svg%3E")
+      16 16,
+    pointer !important;
+}
+
+/* Tekst Banaan */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90' transform='rotate(90 50 50)'%3E🍌%3C/text%3E%3C/svg%3E")
+      16 16,
+    text !important;
+}
+
+/* Utility voor labels */
+.cursor-text-banaan {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90' transform='rotate(90 50 50)'%3E🍌%3C/text%3E%3C/svg%3E")
+      16 16,
+    text !important;
+}
+
+/* Verboden Cursor */
+[disabled],
+.disabled,
+.cursor-not-allowed {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E🚫%3C/text%3E%3C/svg%3E")
+      16 16,
+    not-allowed !important;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+.page {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flying-banana {
+  position: fixed;
+  z-index: 1000;
+  font-size: 4rem;
+  transition: all 0.7s cubic-bezier(0.5, 0, 0.75, 0);
+  pointer-events: none;
+  opacity: 1;
+  will-change: transform, top, left, opacity;
+}
+
+.admin-drop-zone {
+  border: 3px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.admin-drop-zone.dragover {
+  background-color: #f0f9ff;
+  border-color: #3b82f6;
+}
+
+.flashcard-stack-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out, opacity 0.4s ease-in-out;
+}
+.flashcard-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+.flashcard-stack-card.is-flipped {
+  transform: rotateY(180deg);
+}
+.flashcard-stack-card.is-sliding {
+  transform: translateY(120%) rotate(8deg) !important;
+  opacity: 0 !important;
+}
+
+.soundboard-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 1rem;
+  background-color: #facc15;
+  border: 4px solid #eab308;
+  border-radius: 9999px;
+  color: #422006;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease-out;
+  user-select: none;
+}
+.soundboard-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background-color: #fde047;
+}
+.soundboard-button:active {
+  transform: translateY(1px);
+  background-color: #eab308;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.soundboard-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.soundboard-name {
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+@keyframes bobo-jump {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  75% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.animate-bobo-jump {
+  animation: bobo-jump 0.8s ease-out;
+}
+
+@keyframes banana-explosion {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty)))
+      scale(1.5) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+.animate-banana-pop {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  animation: banana-explosion 1s ease-out forwards;
+}
+
+@keyframes float-banana {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(10deg);
+  }
+}
+
+.animate-float-banana {
+  animation: float-banana 3s ease-in-out infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shadow-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+}
+
+.animate-bobo-jump + div {
+  animation: shadow-pulse 0.8s ease-out;
+}
+
+/* Wacky Lab Custom Animations */
+
+/* 1. Panic Flashing on body background */
+body.panic-active {
+  animation: panic-flash 0.5s infinite, panic-shake 0.3s infinite !important;
+}
+
+@keyframes panic-flash {
+  0%, 100% {
+    background-color: #f87171; /* red-400 */
+  }
+  50% {
+    background-color: #60a5fa; /* blue-400 */
+  }
+}
+
+@keyframes panic-shake {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(-2px, 1.5px) rotate(-0.3deg);
+  }
+  40% {
+    transform: translate(1.5px, -1.5px) rotate(0.3deg);
+  }
+  60% {
+    transform: translate(-1px, -1px) rotate(-0.1deg);
+  }
+  80% {
+    transform: translate(1.5px, 1px) rotate(0.1deg);
+  }
+}
+
+/* 2. Rennende minions animatie */
+@keyframes scurry {
+  0% {
+    transform: translateX(-150px);
+  }
+  100% {
+    transform: translateX(110vw);
+  }
+}
+
+.animate-scurry {
+  animation: scurry 3s linear forwards;
+}
+
+/* 3. Pratende minion mond */
+@keyframes mouth-chatter {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.3) translateY(4px);
+  }
+}
+
+.animate-mouth-chatter {
+  animation: mouth-chatter 0.12s infinite;
+}
+
+/* Global Effects for Shop Pranks */
+
+/* 1. PX-41 Purple Mutant Serum */
+body.purple-mutant-active {
+  filter: hue-rotate(275deg) saturate(1.8) contrast(1.1) !important;
+  transition: filter 1s ease;
+  will-change: filter;
+  transform: translate3d(0, 0, 0);
+}
+
+body.purple-mutant-active main,
+body.purple-mutant-active header {
+  animation: mutant-shake 0.4s infinite alternate;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes mutant-shake {
+  0% { transform: skewX(-0.5deg) translateY(0); }
+  100% { transform: skewX(0.5deg) translateY(1px); }
+}
+
+/* 2. Banana Peel Slip (Knop glijdt weg) */
+body.banana-peel-active button:not([disabled]):hover,
+body.banana-peel-active a:hover,
+body.banana-peel-active input[type="button"]:hover,
+body.banana-peel-active input[type="submit"]:hover {
+  transform: translate(30px, -20px) rotate(8deg) scale(0.95) !important;
+  transition: transform 0.15s ease-out !important;
+  box-shadow: none !important;
+}
+
+/* 3. Midas Gold Skin Cursor */
+body.gold-skin-active,
+body.gold-skin-active a,
+body.gold-skin-active button,
+body.gold-skin-active [role="button"],
+body.gold-skin-active .cursor-pointer {
+  cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org/2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ctext%20y%3D%220.9em%22%20font-size%3D%2290%22%20fill%3D%22gold%22%20stroke%3D%22%23d97706%22%20stroke-width%3D%223%22%20transform%3D%22rotate%2815%2050%2050%29%22%3E%F0%9F%8D%8C%3C%2Ftext%3E%3C%2Fsvg%3E") 16 16, auto !important;
+}
+
+/* Wacky Lab Gacha Machine Shake & Capsule Physics */
+@keyframes shake-machine {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-3px, 3px) rotate(-1deg); }
+  20% { transform: translate(3px, -3px) rotate(1deg); }
+  30% { transform: translate(-3px, -1px) rotate(-1.5deg); }
+  40% { transform: translate(3px, 2px) rotate(1.5deg); }
+  50% { transform: translate(-2px, 3px) rotate(-0.5deg); }
+  60% { transform: translate(2px, -2px) rotate(0.5deg); }
+  70% { transform: translate(-3px, 1px) rotate(-1deg); }
+  80% { transform: translate(3px, -2px) rotate(1deg); }
+  90% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+}
+.animate-shake-machine {
+  animation: shake-machine 0.8s ease-in-out infinite;
+}
+
+@keyframes bounce-capsule-a {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-10px, -20px) rotate(72deg); }
+  40% { transform: translate(12px, -35px) rotate(144deg); }
+  60% { transform: translate(-6px, -45px) rotate(216deg); }
+  80% { transform: translate(8px, -15px) rotate(288deg); }
+}
+.animate-bounce-capsule-a {
+  animation: bounce-capsule-a 1.8s ease-in-out infinite;
+}
+
+@keyframes bounce-capsule-b {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(12px, -25px) rotate(-90deg); }
+  50% { transform: translate(-12px, -40px) rotate(-180deg); }
+  75% { transform: translate(6px, -15px) rotate(-270deg); }
+}
+.animate-bounce-capsule-b {
+  animation: bounce-capsule-b 2.2s ease-in-out infinite;
+}
+
+@keyframes bounce-capsule-c {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  30% { transform: translate(-14px, -30px) rotate(120deg); }
+  60% { transform: translate(14px, -20px) rotate(240deg); }
+}
+.animate-bounce-capsule-c {
+  animation: bounce-capsule-c 1.9s ease-in-out infinite;
+}
+
+@keyframes capsule-drop {
+  0% { transform: translateY(-120px) scale(0.3); opacity: 0; }
+  60% { transform: translateY(0) scale(1.1); opacity: 1; }
+  80% { transform: translateY(-10px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); }
+}
+.animate-capsule-drop {
+  animation: capsule-drop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Mouth speaking animations for voice synthesizer */
+@keyframes mouth-speak-wide {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.15, 0.55) translateY(1px); }
+  40% { transform: scale(0.85, 1.35) translateY(-1px); }
+  60% { transform: scale(1.2, 0.45) translateY(1px); }
+  80% { transform: scale(0.8, 1.2) translateY(-1px); }
+}
+.animate-mouth-speak {
+  animation: mouth-speak-wide 0.14s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+
